@@ -3,3 +3,4 @@ examples/*.js
 build/*.js
 /coverage.html
 /lib/osc-utilities.js
+dist
