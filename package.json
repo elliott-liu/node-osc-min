@@ -56,11 +56,12 @@
     "coverage": "cake coverage",
     "coveralls": "cake coveralls",
     "doc": "cake doc",
-    "prepublish" : "cake doc; coffee -c lib/osc-utilities.coffee",
-    "browserify" : "cake browserify",
+    "prepublish": "cake doc; coffee -c lib/osc-utilities.coffee",
+    "browserify": "cake browserify",
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
-    "lint": "tsc"
+    "lint": "tsc",
+    "format": "prettier --write src/."
   },
   "_id": "osc-min@0.0.5",
   "dist": {
