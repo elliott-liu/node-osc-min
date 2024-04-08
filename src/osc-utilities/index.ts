@@ -13,3 +13,4 @@ export * from "src/osc-utilities/toTimetagBuffer";
 export * from "src/osc-utilities/toIntegerBuffer";
 export * from "src/osc-utilities/oscTypeCodes";
 export * from "src/osc-utilities/oscTypeCodeToTypeString";
+export * from "src/osc-utilities/typeStringToOscTypeCode";
