@@ -1,4 +1,5 @@
 import { timestampToTimetag } from "src/osc-utilities";
+import type { Timetag } from "src/types";
 
 /**
  * Convert a JavaScript Date to a NTP timetag array.
@@ -8,6 +9,6 @@ import { timestampToTimetag } from "src/osc-utilities";
  * @param {Date} date - The JavaScript Date object to convert.
  * @returns {number[]} The NTP timetag array.
  */
-export function dateToTimetag(date: Date): number[] {
+export function dateToTimetag(date: Date): Timetag {
   return timestampToTimetag(date.getTime() / 1000);
 }
