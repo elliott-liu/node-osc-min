@@ -3,8 +3,8 @@ import { StrictError, padding } from "../common";
 /**
  * Try to split a buffer into a leading osc-string and the rest of the buffer.
  *
- * @param buffer - The buffer to split.
- * @param strict - An optional boolean parameter, if `true` an invalid buffer will always return `null`. Defaults to `false`.
+ * @param {Buffer} buffer - The buffer to split.
+ * @param {boolean} strict - An optional boolean parameter, if `true` an invalid buffer will always return `null`. Defaults to `false`.
  * @returns An object containing the split osc-string and the rest of the buffer, with the following layout: `{ string: "blah", rest: Buffer }`.
  * @throws {Error} If the buffer is not a valid buffer or if the osc-string does not contain a null character (in strict mode).
  */
