@@ -51,7 +51,7 @@ export function splitOscString(
   }
 
   // Return the split
-  const rest = buffer.slice(splitPoint);
+  const rest = buffer.subarray(splitPoint);
 
   return { string: str, rest: rest };
 }
