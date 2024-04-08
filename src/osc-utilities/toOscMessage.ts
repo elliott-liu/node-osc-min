@@ -9,7 +9,10 @@ import { concat, toOscString, type OscMessage } from "src/osc-utilities";
  * @returns The OSC message buffer.
  * @throws If the message is missing an address.
  */
-export function toOscMessage(message: OscMessage, strict: boolean): Buffer {
+export function toOscMessage(
+  message: OscMessage,
+  strict: boolean = false,
+): Buffer {
   // The message must have an address
   const address = message?.address ?? message;
   if (typeof address !== "string") {
