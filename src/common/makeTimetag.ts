@@ -1,4 +1,5 @@
-export type MakeTimetagResult = [number, number];
+import { TWO_POW_32, UNIX_EPOCH } from ".";
+import type { Timetag } from "../types";
 
 /**
  * Converts Unix timestamp and fractional seconds to NTP timetag format.
@@ -10,11 +11,7 @@ export type MakeTimetagResult = [number, number];
 export function makeTimetag(
   unixTimestampSeconds: number,
   fractionalSeconds: number,
-): MakeTimetagResult {
-  // NTP epoch is 1900, JavaScript Date is Unix 1970
-  const UNIX_EPOCH = 2208988800;
-  const TWO_POW_32 = Math.pow(2, 32);
-
+): Timetag {
   // Calculate NTP seconds and fractions
   const ntpSeconds = unixTimestampSeconds + UNIX_EPOCH;
   const ntpFractions = Math.round(TWO_POW_32 * fractionalSeconds);
