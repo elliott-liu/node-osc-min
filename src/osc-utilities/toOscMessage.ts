@@ -1,5 +1,5 @@
 import { toOscTypeAndArgs } from "src/common";
-import { concat, toOscString } from "src/osc-utilities";
+import { concat, toOscString, type OscMessage } from "src/osc-utilities";
 
 /**
  * Convert a JavaScript format message into an OSC buffer.
@@ -9,7 +9,7 @@ import { concat, toOscString } from "src/osc-utilities";
  * @returns The OSC message buffer.
  * @throws If the message is missing an address.
  */
-export function toOscMessage(message: any, strict: boolean): Buffer {
+export function toOscMessage(message: OscMessage, strict: boolean): Buffer {
   // The message must have an address
   const address = message?.address ?? message;
   if (typeof address !== "string") {
