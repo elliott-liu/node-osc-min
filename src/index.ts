@@ -1,10 +1,14 @@
-import type {
-  OscBundle,
-  OscMessage,
-  TransformAddress,
-  TransformMessage,
+import {
+  addressTransform,
+  applyTransform,
+  fromOscPacket,
+  messageTransform,
+  toOscPacket,
+  type OscBundle,
+  type OscMessage,
+  type TransformAddress,
+  type TransformMessage,
 } from "src/osc-utilities";
-import * as utils from "src/osc-utilities";
 
 export function fromBuffer(
   buffer: Buffer,
@@ -15,7 +19,7 @@ export function fromBuffer(
   } else if (buffer instanceof Uint8Array) {
     buffer = Buffer.from(buffer);
   }
-  return utils.fromOscPacket(buffer, strict);
+  return fromOscPacket(buffer, strict);
 }
 
 export function toBuffer(
@@ -24,22 +28,22 @@ export function toBuffer(
   opt?: any,
 ): Buffer {
   if (typeof object === "string")
-    return utils.toOscPacket({ address: object, args: strict }, opt);
-  return utils.toOscPacket(object, strict);
+    return toOscPacket({ address: object, args: strict }, opt);
+  return toOscPacket(object, strict);
 }
 
 export function applyAddressTransform(
   buffer: Buffer,
   transform: TransformAddress,
 ): Buffer {
-  return utils.applyTransform(buffer, utils.addressTransform(transform));
+  return applyTransform(buffer, addressTransform(transform));
 }
 
 export function applyMessageTransform(
   buffer: Buffer,
   transform: TransformMessage,
 ): Buffer {
-  return utils.applyTransform(buffer, utils.messageTransform(transform));
+  return applyTransform(buffer, messageTransform(transform));
 }
 
 export {
