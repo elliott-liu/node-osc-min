@@ -1,6 +1,6 @@
-import { ntpToFractionalSeconds } from ".";
-import { UNIX_EPOCH } from "../common";
-import type { Timetag } from "../types";
+import { ntpToFractionalSeconds } from "src/osc-utilities";
+import { UNIX_EPOCH } from "src/common";
+import type { Timetag } from "src/types";
 
 /**
  * Convert a timetag to unix timestamp (seconds since unix epoch).

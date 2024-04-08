@@ -1,4 +1,4 @@
-import { timestampToTimetag } from "..";
+import { timestampToTimetag } from "src/osc-utilities";
 
 /**
  * Convert a JavaScript Date to a NTP timetag array.

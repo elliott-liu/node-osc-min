@@ -1,4 +1,4 @@
-import { TWO_POW_32 } from "../common";
+import { TWO_POW_32 } from "src/common";
 
 /**
  * Convert 32 bit int for NTP fractional seconds to a 32 bit float.

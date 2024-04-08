@@ -1,4 +1,4 @@
-import { StrictError } from "../common";
+import { StrictError } from "src/common";
 
 /**
  * Convert a JavaScript string into a Node.js Buffer containing an OSC-String.

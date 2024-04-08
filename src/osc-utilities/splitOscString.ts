@@ -1,4 +1,4 @@
-import { StrictError, padding } from "../common";
+import { StrictError, padding } from "src/common";
 
 /**
  * Try to split a buffer into a leading osc-string and the rest of the buffer.

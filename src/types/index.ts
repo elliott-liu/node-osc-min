@@ -1,2 +1,2 @@
-export * from "./BufferType";
-export * from "./Timetag";
+export * from "src/types/BufferType";
+export * from "src/types/Timetag";

@@ -1,4 +1,4 @@
-import { makeTimetag } from "../common";
+import { makeTimetag } from "src/common";
 
 /**
  * Convert a unix timestamp (seconds since Jan 1 1970 UTC) to NTP timestamp array.

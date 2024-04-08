@@ -1,4 +1,4 @@
-import type { BufferType } from "../types";
+import type { BufferType } from "src/types";
 
 export type SplitIntegerResult = {
   integer: number;

@@ -1,4 +1,4 @@
-import * as utils from "./osc-utilities";
+import * as utils from "src/osc-utilities";
 
 export function fromBuffer(buffer: Buffer, strict?: boolean) {
   if (buffer instanceof ArrayBuffer) {
@@ -29,7 +29,9 @@ export function applyMessageTransform(
   return utils.applyTransform(buffer, utils.messageTransform(transform));
 }
 
-export const timetagToDate = utils.timetagToDate;
-export const dateToTimetag = utils.dateToTimetag;
-export const timetagToTimestamp = utils.timetagToTimestamp;
-export const timestampToTimetag = utils.timestampToTimetag;
+export {
+  timetagToDate,
+  dateToTimetag,
+  timetagToTimestamp,
+  timestampToTimetag,
+} from "src/osc-utilities";

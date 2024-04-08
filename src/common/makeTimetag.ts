@@ -1,5 +1,5 @@
-import { TWO_POW_32, UNIX_EPOCH } from ".";
-import type { Timetag } from "../types";
+import { TWO_POW_32, UNIX_EPOCH } from "src/common";
+import type { Timetag } from "src/types";
 
 /**
  * Converts Unix timestamp and fractional seconds to NTP timetag format.
