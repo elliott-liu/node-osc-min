@@ -4,10 +4,10 @@
 export class StrictError extends Error {
   /**
    * Creates a new instance of the StrictError class.
-   * @param str - The error message.
+   * @param string - The error message.
    */
-  constructor(str: string) {
-    super("Strict Error: " + str);
+  constructor(string: string) {
+    super("Strict Error: " + string);
     this.name = "StrictError";
   }
 }
