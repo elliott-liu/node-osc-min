@@ -1,7 +1,7 @@
 import { isOscBundleBuffer } from "src/common";
 import {
   applyMessageTransformerToBundle,
-  type MessageTransform,
+  type TransformMessage,
 } from "src/osc-utilities";
 
 /**
@@ -14,8 +14,8 @@ import {
  */
 export function applyTransform(
   buffer: Buffer,
-  messageTransform: MessageTransform,
-  bundleTransform?: MessageTransform,
+  messageTransform: TransformMessage,
+  bundleTransform?: TransformMessage,
 ): Buffer {
   if (!bundleTransform) {
     bundleTransform = applyMessageTransformerToBundle(messageTransform);
