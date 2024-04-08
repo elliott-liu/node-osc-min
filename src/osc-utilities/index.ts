@@ -11,3 +11,4 @@ export * from "src/osc-utilities/deltaTimetag";
 export * from "src/osc-utilities/ntpToFractionalSeconds";
 export * from "src/osc-utilities/toTimetagBuffer";
 export * from "src/osc-utilities/toIntegerBuffer";
+export * from "src/osc-utilities/oscTypeCodes";
