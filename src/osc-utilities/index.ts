@@ -8,3 +8,4 @@ export * from "src/osc-utilities/timestampToTimetag";
 export * from "src/osc-utilities/timetagToTimestamp";
 export * from "src/osc-utilities/timetagToDate";
 export * from "src/osc-utilities/ntpToFractionalSeconds";
+export * from "src/osc-utilities/deltaTimetag";
