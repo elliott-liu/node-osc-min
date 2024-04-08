@@ -1,4 +1,3 @@
-import { StrictError } from "src/common";
 import {
   concat,
   splitInteger,
