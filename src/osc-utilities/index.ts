@@ -5,3 +5,4 @@ export * from "./splitInteger";
 export * from "./splitTimetag";
 export * from "./dateToTimetag";
 export * from "./timestampToTimetag";
+export * from "./ntpToFractionalSeconds";
