@@ -46,9 +46,4 @@ export function applyMessageTransform(
   return applyTransform(buffer, messageTransform(transform));
 }
 
-export {
-  timetagToDate,
-  dateToTimetag,
-  timetagToTimestamp,
-  timestampToTimetag,
-} from "src/osc-utilities";
+export * from "src/osc-utilities";
