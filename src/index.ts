@@ -1,6 +1,6 @@
 import * as utils from "src/osc-utilities";
 
-export function fromBuffer(buffer: Buffer, strict?: boolean) {
+export function fromBuffer(buffer: Buffer, strict: boolean = false) {
   if (buffer instanceof ArrayBuffer) {
     buffer = Buffer.from(new Uint8Array(buffer));
   } else if (buffer instanceof Uint8Array) {
@@ -9,7 +9,7 @@ export function fromBuffer(buffer: Buffer, strict?: boolean) {
   return utils.fromOscPacket(buffer, strict);
 }
 
-export function toBuffer(object: any, strict?: boolean, opt?: any) {
+export function toBuffer(object: any, strict: boolean = false, opt?: any) {
   if (typeof object === "string")
     return utils.toOscPacket({ address: object, args: strict }, opt);
   return utils.toOscPacket(object, strict);
