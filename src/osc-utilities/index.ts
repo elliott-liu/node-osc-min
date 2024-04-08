@@ -16,3 +16,4 @@ export * from "src/osc-utilities/oscTypeCodeToTypeString";
 export * from "src/osc-utilities/typeStringToOscTypeCode";
 export * from "src/osc-utilities/argToTypeCode";
 export * from "src/osc-utilities/splitOscArgument";
+export * from "src/osc-utilities/toOscArgument";
