@@ -1,3 +1,4 @@
+import type { TransformAddress, TransformMessage } from "src/osc-utilities";
 import * as utils from "src/osc-utilities";
 
 export function fromBuffer(buffer: Buffer, strict: boolean = false) {
@@ -17,15 +18,15 @@ export function toBuffer(object: any, strict: boolean = false, opt?: any) {
 
 export function applyAddressTransform(
   buffer: Buffer,
-  transform: (address: string) => string,
-) {
+  transform: TransformAddress,
+): Buffer {
   return utils.applyTransform(buffer, utils.addressTransform(transform));
 }
 
 export function applyMessageTransform(
   buffer: Buffer,
-  transform: (message: any) => any,
-) {
+  transform: TransformMessage,
+): Buffer {
   return utils.applyTransform(buffer, utils.messageTransform(transform));
 }
 
