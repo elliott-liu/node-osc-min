@@ -20,3 +20,4 @@ export * from "src/osc-utilities/toOscArgument";
 export * from "src/osc-utilities/fromOscMessage";
 export * from "src/osc-utilities/fromOscBundle";
 export * from "src/osc-utilities/fromOscPacket";
+export * from "src/osc-utilities/toOscMessage";
