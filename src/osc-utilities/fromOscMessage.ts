@@ -1,7 +1,9 @@
 import { StrictError } from "src/common";
-import { oscTypeCodeToTypeString } from "src/osc-utilities/oscTypeCodeToTypeString";
-import { splitOscArgument } from "src/osc-utilities/splitOscArgument";
-import { splitOscString } from "src/osc-utilities/splitOscString";
+import {
+  splitOscArgument,
+  splitOscString,
+  oscTypeCodeToTypeString,
+} from "src/osc-utilities";
 
 export type OscMessage = {
   address: string;
