@@ -14,12 +14,6 @@ export type OscTypeCodes = {
   [key in TypeCode]: OscTypeCode;
 };
 
-export type OscTypeCode = {
-  representation: TypeCodeRepresentation;
-  split: (buffer: Buffer, strict: boolean) => { value: any; rest: Buffer };
-  toArg: (value: any, strict: boolean) => Buffer;
-};
-
 export type TypeCode =
   | "s"
   | "i"
@@ -43,6 +37,21 @@ export type TypeCodeRepresentation =
   | "false"
   | "null"
   | "bang";
+
+export type OscTypeCode = {
+  representation: TypeCodeRepresentation;
+  split: OscTypeCodeSplit;
+  toArg: OscTypeCodeToArg;
+};
+
+export type OscTypeCodeSplit = (
+  buffer: Buffer,
+  strict: boolean,
+) => OscTypeCodeSplitResult;
+
+export type OscTypeCodeSplitResult = { value: any; rest: Buffer };
+
+export type OscTypeCodeToArg = (value: any, strict: boolean) => Buffer;
 
 /**
  * `oscTypeCodes` is an object that maps OSC type codes to their JavaScript representations,
