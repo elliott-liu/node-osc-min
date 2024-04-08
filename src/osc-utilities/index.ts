@@ -23,3 +23,5 @@ export * from "src/osc-utilities/fromOscPacket";
 export * from "src/osc-utilities/toOscMessage";
 export * from "src/osc-utilities/toOscBundle";
 export * from "src/osc-utilities/toOscPacket";
+export * from "src/osc-utilities/applyMessageTransformerToBundle";
+export * from "src/osc-utilities/applyTransform";
