@@ -25,3 +25,4 @@ export * from "src/osc-utilities/toOscBundle";
 export * from "src/osc-utilities/toOscPacket";
 export * from "src/osc-utilities/applyMessageTransformerToBundle";
 export * from "src/osc-utilities/applyTransform";
+export * from "src/osc-utilities/addressTransform";
