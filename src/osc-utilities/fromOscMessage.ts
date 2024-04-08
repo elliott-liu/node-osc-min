@@ -8,10 +8,8 @@ import {
 export type OscMessage = {
   address: string;
   args: unknown[];
-  oscType?: OscType;
+  oscType?: "message";
 };
-
-export type OscType = "message" | "bundle";
 
 /**
  * Translates an OSC message into a JavaScript representation.

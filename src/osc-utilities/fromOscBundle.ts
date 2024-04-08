@@ -5,7 +5,7 @@ import type { Timetag } from "src/types";
 export type OscBundle = {
   timetag: Timetag;
   elements: any;
-  oscType: string;
+  oscType: "bundle";
 };
 
 /**
