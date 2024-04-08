@@ -8,7 +8,11 @@ import {
   toTimetagBuffer,
 } from "src/osc-utilities";
 
-export type OscTypeCodes = Record<TypeCode, OscTypeCode>;
+export type OscTypeCodes = {
+  [key: string]: OscTypeCode;
+} & {
+  [key in TypeCode]: OscTypeCode;
+};
 
 export type OscTypeCode = {
   representation: TypeCodeRepresentation;
