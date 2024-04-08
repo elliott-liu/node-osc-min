@@ -3,7 +3,7 @@ import { oscTypeCodeToTypeString } from "src/osc-utilities/oscTypeCodeToTypeStri
 import { splitOscArgument } from "src/osc-utilities/splitOscArgument";
 import { splitOscString } from "src/osc-utilities/splitOscString";
 
-export type OscMessageResult = {
+export type OscMessage = {
   address: string;
   args: unknown[];
   oscType?: OscType;
@@ -20,10 +20,7 @@ export type OscType = "message" | "bundle";
  * @throws If strict mode is enabled and the OSC message violates the rules.
  * @throws If the OSC message contains an unknown argument code.
  */
-export function fromOscMessage(
-  buffer: Buffer,
-  strict: boolean,
-): OscMessageResult {
+export function fromOscMessage(buffer: Buffer, strict: boolean): OscMessage {
   // Break off the address
   const { string: address, rest: remainingBuffer } = splitOscString(
     buffer,
