@@ -1,3 +1,4 @@
+import { StrictError } from "src/common";
 import type { BufferType } from "src/types";
 
 export type SplitIntegerResult = {
@@ -56,7 +57,7 @@ export function splitInteger(
       value = buffer.readUInt8(0);
       break;
     default:
-      throw new Error(`Unsupported integer type: ${type}.`);
+      throw new StrictError(`Unsupported integer type: ${type}.`);
   }
 
   if (buffer.length < bytes) {
