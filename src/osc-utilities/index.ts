@@ -10,3 +10,4 @@ export * from "src/osc-utilities/timetagToDate";
 export * from "src/osc-utilities/deltaTimetag";
 export * from "src/osc-utilities/ntpToFractionalSeconds";
 export * from "src/osc-utilities/toTimetagBuffer";
+export * from "src/osc-utilities/toIntegerBuffer";
