@@ -18,3 +18,5 @@ export * from "src/osc-utilities/argToTypeCode";
 export * from "src/osc-utilities/splitOscArgument";
 export * from "src/osc-utilities/toOscArgument";
 export * from "src/osc-utilities/fromOscMessage";
+export * from "src/osc-utilities/fromOscBundle";
+export * from "src/osc-utilities/fromOscPacket";
