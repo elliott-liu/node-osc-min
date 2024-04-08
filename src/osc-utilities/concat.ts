@@ -5,8 +5,8 @@
  *
  * This is really only exported for TDD, but maybe it'll be useful to someone else too.
  *
- * @param {Buffer[]} buffers
- * @returns {Buffer[]}
+ * @param buffers - Array of buffers to concatenate.
+ * @returns The concatenated buffer.
  */
 export function concat(buffers: Buffer[]): Buffer {
   if (!Array.isArray(buffers)) {

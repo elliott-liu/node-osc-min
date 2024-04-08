@@ -4,9 +4,9 @@ import type { BufferType } from "src/types";
 /**
  * Converts a number to an integer buffer of the specified type.
  *
- * @param {number} number The number to convert.
- * @param {BufferType} type The type of buffer to create. Defaults to "Int32".
- * @returns {Buffer} The buffer containing the converted number.
+ * @param number The number to convert.
+ * @param type The type of buffer to create. Defaults to "Int32".
+ * @returns The buffer containing the converted number.
  * @throws Error if the input number is not a valid number.
  * @throws Error if the specified type is not supported.
  */

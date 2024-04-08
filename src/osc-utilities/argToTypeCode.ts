@@ -3,9 +3,9 @@ import { typeStringToOscTypeCode } from "src/osc-utilities";
 /**
  * Converts an argument to its corresponding OSC type code.
  *
- * @param {any} arg - The argument to convert.
- * @param {boolean} strict - Whether to throw an error if the argument has no value.
- * @returns {string} The OSC type code.
+ * @param arg - The argument to convert.
+ * @param strict - Whether to throw an error if the argument has no value.
+ * @returns The OSC type code.
  * @throws If the argument has no value and strict is true, or if the type is unknown.
  */
 export function argToTypeCode(arg: any, strict: boolean): string {

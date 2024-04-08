@@ -6,8 +6,8 @@ import type { Timetag } from "src/types";
  *
  * Time zone of the Date object is respected, as the NTP timetag uses UTC.
  *
- * @param {Date} date - The JavaScript Date object to convert.
- * @returns {number[]} The NTP timetag array.
+ * @param date - The JavaScript Date object to convert.
+ * @returns The NTP timetag array.
  */
 export function dateToTimetag(date: Date): Timetag {
   return timestampToTimetag(date.getTime() / 1000);

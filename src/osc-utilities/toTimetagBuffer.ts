@@ -3,8 +3,8 @@ import type { Timetag } from "src/types";
 
 /**
  * Encodes a timetag of type `null` | `Number` | `Array` | `Date` as a Buffer for adding to an OSC bundle.
- * @param {null|number|Array|Date} timetag - The timetag to encode.
- * @returns {Buffer} The encoded timetag as a Buffer.
+ * @param timetag - The timetag to encode.
+ * @returns The encoded timetag as a Buffer.
  */
 export function toTimetagBuffer(
   timetag: null | number | Timetag | Date,

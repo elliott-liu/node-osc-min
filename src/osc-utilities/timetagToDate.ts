@@ -5,8 +5,8 @@ import type { Timetag } from "src/types";
 /**
  * Convert NTP timestamp array to a JavaScript Date in your system's local time zone.
  *
- * @param {Timetag} timetag - NTP timestamp array `[seconds, fractional]`.
- * @returns {Date} A JavaScript Date object in local time zone.
+ * @param timetag - NTP timestamp array `[seconds, fractional]`.
+ * @returns A JavaScript Date object in local time zone.
  */
 export function timetagToDate(timetag: Timetag): Date {
   let [seconds, fractional] = timetag;

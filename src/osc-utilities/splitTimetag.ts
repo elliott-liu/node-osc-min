@@ -3,9 +3,9 @@ export type SplitTimetagResult = { timetag: [number, number]; rest: Buffer };
 /**
  * Split off an OSC timetag from buffer.
  *
- * @param {Buffer} buffer - The buffer containing the timetag.
- * @returns {SplitTimetagResult} - The split timetag and the rest of the buffer.
- * @throws {Error} - If the buffer is not big enough to contain a timetag.
+ * @param buffer - The buffer containing the timetag.
+ * @returns The split timetag and the rest of the buffer.
+ * @throws If the buffer is not big enough to contain a timetag.
  */
 export function splitTimetag(buffer: Buffer): SplitTimetagResult {
   const UINT32_BYTES: number = 4; // UInt32 is 4 bytes

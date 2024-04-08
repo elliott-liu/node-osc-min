@@ -4,9 +4,9 @@ import type { Timetag } from "src/types";
 /**
  * Converts Unix timestamp and fractional seconds to NTP timetag format.
  *
- * @param {number} unixTimestampSeconds - The Unix timestamp in seconds.
- * @param {number} fractionalSeconds - The fractional seconds.
- * @returns {MakeTimetagResult} An array containing the NTP seconds and NTP fractions.
+ * @param unixTimestampSeconds - The Unix timestamp in seconds.
+ * @param fractionalSeconds - The fractional seconds.
+ * @returns An array containing the NTP seconds and NTP fractions.
  */
 export function makeTimetag(
   unixTimestampSeconds: number,

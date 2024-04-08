@@ -11,9 +11,9 @@ export type SplitIntegerResult = {
  *
  * This has similar semantics to splitOscString but works with integers instead.
  *
- * @param {Buffer} buffer - The buffer containing the integer value.
- * @param {BufferType} type - The type of the integer value. Defaults to "Int32".
- * @returns {SplitIntegerResult} An object containing the split integer value and the remaining buffer.
+ * @param buffer - The buffer containing the integer value.
+ * @param type - The type of the integer value. Defaults to "Int32".
+ * @returns An object containing the split integer value and the remaining buffer.
  * @throws Error if the integer type is unsupported or if the buffer is not big enough.
  */
 export function splitInteger(

@@ -8,10 +8,10 @@ import {
 /**
  * Splits out an argument from a buffer. Same thing as splitOscString but works for all argument types.
  *
- * @param {Buffer} buffer - The buffer to split the argument from.
- * @param {TypeCodeRepresentation | string} type - The type of the argument.
- * @param {boolean} strict - Whether to strictly split the argument.
- * @returns {OscTypeCodeSplitResult} The split argument.
+ * @param buffer - The buffer to split the argument from.
+ * @param type - The type of the argument.
+ * @param strict - Whether to strictly split the argument.
+ * @returns The split argument.
  * @throws If the type is not understood.
  */
 export function splitOscArgument(
