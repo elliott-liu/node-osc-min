@@ -441,3 +441,38 @@ it("fromOscBundle works with multiple messages", () => {
     expect(element2.address).toBe("/addr2");
   }
 });
+
+it("fromOscBundle works with nested bundles", () => {
+  const oscBundle1 = toOscString("#bundle");
+  const timetag1: Timetag = [0, 0];
+  const oscTimetag1 = toTimetagBuffer(timetag1);
+  const oscAddress1 = toOscString("/addr");
+  const oscType1 = toOscString(",");
+  const oscMessage1 = concat([oscAddress1, oscType1]);
+  const oscLength1 = toIntegerBuffer(oscMessage1.length);
+  const oscBundle2 = toOscString("#bundle");
+  const timetag2: Timetag = [0, 0];
+  const oscTimetag2 = toTimetagBuffer(timetag2);
+  const oscMessage2 = concat([oscBundle2, oscTimetag2]);
+  const oscLength2 = toIntegerBuffer(oscMessage2.length);
+  const buffer = concat([
+    oscBundle1,
+    oscTimetag1,
+    oscLength1,
+    oscMessage1,
+    oscLength2,
+    oscMessage2,
+  ]);
+  const { elements, timetag } = fromOscBundle(buffer);
+  expect(timetag).toEqual(timetag1);
+  expect(elements.length).toBe(2);
+  const [element1, element2] = elements;
+  expect(element1?.oscType).toBe("message");
+  if (element1?.oscType === "message") {
+    expect(element1.address).toBe("/addr");
+  }
+  expect(element2?.oscType).toBe("bundle");
+  if (element2?.oscType === "bundle") {
+    expect(element2.timetag).toEqual(timetag2);
+  }
+});
