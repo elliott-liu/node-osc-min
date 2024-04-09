@@ -514,3 +514,12 @@ it("fromOscBundle fails with bad bundle ID", () => {
   const buffer = concat([oscBundle, oscTimetag]);
   expect(() => fromOscBundle(buffer)).toThrow();
 });
+
+it("fromOscBundle fails with ridiculous sizes", () => {
+  const oscBundle = toOscString("#bundle");
+  const inputTimetag: Timetag = [0, 0];
+  const oscTimetag = toTimetagBuffer(inputTimetag);
+  const oscFakeLength = toIntegerBuffer(999999);
+  const buffer = concat([oscBundle, oscTimetag, oscFakeLength]);
+  expect(() => fromOscBundle(buffer)).toThrow();
+});
