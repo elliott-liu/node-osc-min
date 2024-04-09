@@ -16,7 +16,10 @@ export type OscBundle = {
  * @returns The parsed OSC bundle object.
  * @throws If the OSC bundle is invalid.
  */
-export function fromOscBundle(buffer: Buffer, strict: boolean): OscBundle {
+export function fromOscBundle(
+  buffer: Buffer,
+  strict: boolean = false,
+): OscBundle {
   // Break off the bundletag
   const { string: bundleTag, rest: bundleBuffer } = splitOscString(
     buffer,

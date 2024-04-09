@@ -8,6 +8,7 @@ import {
   splitOscArgument,
   fromOscMessage,
   toTimetagBuffer,
+  fromOscBundle,
 } from "src";
 import type { Timetag } from "src/types";
 
@@ -377,4 +378,14 @@ it("fromOscMessage strict fails if type address doesn't begin with /", () => {
   const oscType = toOscString(",");
   const oscMessage = concat([oscAddress, oscType]);
   expect(() => fromOscMessage(oscMessage, true)).toThrowError();
+});
+
+it("fromOscBundle works with no messages", () => {
+  const oscBundle = toOscString("#bundle");
+  const inputTimetag: Timetag = [0, 0];
+  const oscTimetag = toTimetagBuffer(inputTimetag);
+  const buffer = concat([oscBundle, oscTimetag]);
+  const { elements, timetag } = fromOscBundle(buffer);
+  expect(timetag).toEqual(inputTimetag);
+  expect(elements).toEqual([]);
 });
