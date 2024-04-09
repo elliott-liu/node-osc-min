@@ -7,6 +7,7 @@ import {
   toOscString,
   toTimetagBuffer,
 } from "src/osc-utilities";
+import type { ArgRepresentation } from "src/types";
 
 export type OscTypeCodes = {
   [key: string]: OscTypeCode;
@@ -26,20 +27,8 @@ export type TypeCode =
   | "N"
   | "I";
 
-export type TypeCodeRepresentation =
-  | "string"
-  | "integer"
-  | "timetag"
-  | "float"
-  | "double"
-  | "blob"
-  | "true"
-  | "false"
-  | "null"
-  | "bang";
-
 export type OscTypeCode = {
-  representation: TypeCodeRepresentation;
+  representation: ArgRepresentation;
   split: OscTypeCodeSplit;
   toArg: OscTypeCodeToArg;
 };
