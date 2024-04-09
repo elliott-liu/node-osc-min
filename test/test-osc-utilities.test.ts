@@ -649,3 +649,10 @@ it("toOscMessage with nested array argument works", () =>
   roundTripMessage([
     [{ type: "array", value: [{ type: "string", value: "hello" }] }],
   ]));
+
+function bufferEquals(buffer: Buffer, expectedBuffer: Buffer) {
+  expect(buffer.length).toBe(expectedBuffer.length);
+  buffer.forEach((byte, index) => {
+    expect(byte).toBe(expectedBuffer[index]);
+  });
+}
