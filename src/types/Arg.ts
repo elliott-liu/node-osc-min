@@ -1,3 +1,5 @@
+import type { Timetag } from "src/types/Timetag";
+
 export type Arg =
   | {
       type: "string";
@@ -9,7 +11,7 @@ export type Arg =
     }
   | {
       type: "timetag";
-      value: string;
+      value: Timetag;
     }
   | {
       type: "float";
