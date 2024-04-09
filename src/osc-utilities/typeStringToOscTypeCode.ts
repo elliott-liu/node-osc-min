@@ -2,8 +2,8 @@ import {
   oscTypeCodes,
   type OscTypeCode,
   type TypeCode,
-  type TypeCodeRepresentation,
 } from "src/osc-utilities";
+import type { ArgRepresentation } from "src/types";
 
 /**
  * Converts a JavaScript string representation into its OSC type code.
@@ -12,7 +12,7 @@ import {
  * @returns The OSC type code, or null if not found.
  */
 export function typeStringToOscTypeCode(
-  typeCodeRepresentation: TypeCodeRepresentation | string,
+  typeCodeRepresentation: ArgRepresentation | string,
 ): TypeCode | null {
   for (const code in oscTypeCodes) {
     if (oscTypeCodes.hasOwnProperty(code)) {

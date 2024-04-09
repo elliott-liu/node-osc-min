@@ -2,8 +2,8 @@ import {
   oscTypeCodes,
   typeStringToOscTypeCode,
   type OscTypeCodeSplitResult,
-  type TypeCodeRepresentation,
 } from "src/osc-utilities";
+import type { ArgRepresentation } from "src/types";
 
 /**
  * Splits out an argument from a buffer. Same thing as splitOscString but works for all argument types.
@@ -16,7 +16,7 @@ import {
  */
 export function splitOscArgument(
   buffer: Buffer,
-  type: TypeCodeRepresentation | string,
+  type: ArgRepresentation | string,
   strict: boolean = false,
 ): OscTypeCodeSplitResult {
   const oscTypeCode = typeStringToOscTypeCode(type);

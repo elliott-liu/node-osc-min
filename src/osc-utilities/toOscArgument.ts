@@ -1,8 +1,5 @@
-import {
-  typeStringToOscTypeCode,
-  oscTypeCodes,
-  type TypeCodeRepresentation,
-} from "src/osc-utilities";
+import { typeStringToOscTypeCode, oscTypeCodes } from "src/osc-utilities";
+import type { ArgRepresentation } from "src/types";
 
 /**
  * Create a buffer with the given JavaScript type.
@@ -15,8 +12,8 @@ import {
  */
 export function toOscArgument(
   value: any,
-  type: TypeCodeRepresentation | string,
-  strict: boolean,
+  type: ArgRepresentation | string,
+  strict: boolean = false,
 ): Buffer {
   const oscTypeCode = typeStringToOscTypeCode(type);
   if (oscTypeCode) {

@@ -1,8 +1,5 @@
-import {
-  oscTypeCodes,
-  type TypeCode,
-  type TypeCodeRepresentation,
-} from "src/osc-utilities";
+import { oscTypeCodes, type TypeCode } from "src/osc-utilities";
+import type { ArgRepresentation } from "src/types";
 
 /**
  * Converts an OSC type code into its JavaScript string representation.
@@ -12,6 +9,6 @@ import {
  */
 export function oscTypeCodeToTypeString(
   code: TypeCode | string,
-): TypeCodeRepresentation | undefined {
+): ArgRepresentation | undefined {
   return oscTypeCodes[code]?.representation;
 }
