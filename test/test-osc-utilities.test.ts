@@ -682,3 +682,19 @@ it("toOscMessage with single numeric argument works", () => {
   expect(((args as ArgType[])[0] as ArgType).value).toBe(13);
   expect(((args as ArgType[])[0] as ArgType).type).toBe("float");
 });
+
+it("toOscMessage with single blob argument works", () => {
+  const buffer = Buffer.alloc(18);
+  const oscMessage: OscMessage = {
+    address: "/addr",
+    args: buffer,
+  };
+  const { address, args } = fromOscMessage(toOscMessage(oscMessage), true);
+  expect(address).toBe("/addr");
+  const [argument1] = args as ArgType[];
+  expect((args as ArgType[]).length).toBe(1);
+  expect(argument1?.type).toBe("blob");
+  if (argument1?.type === "blob") {
+    bufferEquals(argument1?.value, buffer);
+  }
+});
