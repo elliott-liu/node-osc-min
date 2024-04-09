@@ -588,32 +588,29 @@ function roundTripMessage(args: Arg[]): void {
 
   const roundTrip = fromOscMessage(toOscMessage(oscMessage), true);
 
-  expect(roundTrip?.address).toBe("/addr");
-  expect(roundTrip?.args?.length).toBe(args.length);
+  expect(roundTrip.address).toBe("/addr");
+  expect(roundTrip.args.length).toBe(args.length);
 
-  for (let i = 0; i < args.length; i++) {
-    const argumentValues = args[i];
-    if (isArgType(argumentValues)) {
-      const comparison = argumentValues.value ?? argumentValues;
+  args.forEach((arg, argIndex) => {
+    if (isArgType(arg)) {
+      const comparison = arg.value ?? arg;
 
       if (Buffer.isBuffer(comparison)) {
-        for (let j = 0; j < comparison.length; j++) {
-          const bufferArgument = roundTrip.args?.[i];
+        comparison.forEach((byte, byteIndex) => {
+          const bufferArgument = roundTrip.args[argIndex];
+          expect(isArgType(bufferArgument)).toBe(true);
           if (isArgType(bufferArgument)) {
-            const bufferArgumentArray = bufferArgument.value;
-            if (isArgTypeArray(bufferArgumentArray)) {
-              expect(bufferArgumentArray[j]).toEqual(comparison[j]);
-            }
+            expect((bufferArgument.value as ArgType[])[byteIndex]).toEqual(
+              byte,
+            );
           }
-        }
+        });
       } else {
-        const argument = roundTrip?.args?.[i];
-        if (isArgType(argument)) {
-          expect(argument.value).toEqual(comparison);
-        }
+        expect(isArgType(roundTrip.args[argIndex])).toBe(true);
+        expect((roundTrip.args[argIndex] as ArgType).value).toEqual(comparison);
       }
     }
-  }
+  });
 }
 
 // We tested fromOsc* manually, so just use roundtrip testing for toOsc*
