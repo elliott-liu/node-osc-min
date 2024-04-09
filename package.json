@@ -4,7 +4,6 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "type": "module",
   "author": {
     "name": "Russell McClellan",
     "email": "russell.mcclellan@gmail.com",
@@ -26,16 +25,16 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "@types/mocha": "^10.0.6",
     "@types/node": "^20.12.5",
+    "@vitest/coverage-v8": "^1.4.0",
     "blanket": "*",
     "browserify": "^6.1.0",
     "coffee-script": ">=1.7.1 <2.0.0",
     "coveralls": "*",
-    "mocha": "~2.5.3",
     "tsup": "^8.0.2",
     "typescript": "^5.4.4",
-    "uglify-js": "^2.4.15"
+    "uglify-js": "^2.4.15",
+    "vitest": "^1.4.0"
   },
   "config": {
     "blanket": {
@@ -54,7 +53,7 @@
   },
   "scripts": {
     "test": "cake test",
-    "coverage": "cake coverage",
+    "coverage": "vitest run --coverage",
     "coveralls": "cake coveralls",
     "doc": "cake doc",
     "prepublish": "cake doc; coffee -c lib/osc-utilities.coffee",
@@ -63,7 +62,7 @@
     "release": "pnpm run build && changeset publish",
     "lint": "tsc",
     "format": "prettier --write src/.",
-    "test:mocha": "mocha 'test/**/*.ts'"
+    "test:vite": "vitest"
   },
   "_id": "osc-min@0.0.5",
   "dist": {

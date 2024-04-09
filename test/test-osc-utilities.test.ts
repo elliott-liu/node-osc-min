@@ -1,8 +1,8 @@
-const { describe, it } = require("mocha");
-const assert = require("assert");
-const osc = require("../dist/index.cjs");
+import { describe, expect, it, test } from "vitest";
+import assert from "assert";
+import * as osc from "../dist/index";
 
-function testString(str, expectedLength) {
+function testString(str: string, expectedLength: number) {
   return {
     str: str,
     len: expectedLength,
@@ -17,7 +17,7 @@ const testData = [
   testString("abcdefg", 8),
 ];
 
-function testStringLength(str, expected_len) {
+function testStringLength(str: string, expected_len: number) {
   const oscStr = osc.toOscString(str);
   assert.strictEqual(oscStr.length, expected_len);
 }
@@ -30,7 +30,7 @@ describe("basic strings length", () => {
   }
 });
 
-function testStringRoundTrip(str, strict) {
+function testStringRoundTrip(str: string, strict: boolean | undefined) {
   const oscStr = osc.toOscString(str);
   const str2 = osc.splitOscString(oscStr, strict)?.string;
   assert.strictEqual(str, str2);
