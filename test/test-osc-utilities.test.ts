@@ -9,9 +9,11 @@ import {
   fromOscMessage,
   toTimetagBuffer,
   fromOscBundle,
+  type OscMessage,
+  toOscMessage,
   toOscArgument,
 } from "src";
-import type { Timetag } from "src/types";
+import type { OscMessageArg, Timetag } from "src/types";
 
 type TestData = { string: string; expectedLength: number };
 
@@ -529,3 +531,26 @@ it("toOscArgument fails when given bogus type", () => {
   expect(() => toOscArgument("bleh", "bogus")).toThrowError();
 });
 
+function roundTripMessage(args: OscMessageArg[]) {
+  const oscMessage: OscMessage = {
+    address: "/addr",
+    args,
+  };
+  const roundTrip = fromOscMessage(toOscMessage(oscMessage), true);
+  expect(roundTrip.address).toBe("/addr");
+  expect(roundTrip.args.length).toEqual(args.length);
+  args.forEach((arg, index) => {
+    const comparison = args[index]?.value || args[index];
+    expect(roundTrip.args[index]?.type).toBe(arg.type);
+    if (Buffer.isBuffer(comparison)) {
+      for (let i = 0; i < comparison.length; i++) {
+        expect(roundTrip.args[index]?.value).toEqual(comparison[i]);
+      }
+    } else {
+      expect(roundTrip.args[index]?.value).toBe(comparison);
+    }
+  });
+}
+
+// We tested fromOsc* manually, so just use roundtrip testing for toOsc*
+it("toOscMessage with no args works", () => roundTripMessage([]));
