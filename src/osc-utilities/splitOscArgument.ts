@@ -17,7 +17,7 @@ import {
 export function splitOscArgument(
   buffer: Buffer,
   type: TypeCodeRepresentation | string,
-  strict: boolean,
+  strict: boolean = false,
 ): OscTypeCodeSplitResult {
   const oscTypeCode = typeStringToOscTypeCode(type);
   if (oscTypeCode) {
