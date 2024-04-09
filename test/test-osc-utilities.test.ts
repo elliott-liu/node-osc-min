@@ -308,21 +308,21 @@ it("fromOscMessage with bang array argument works", () => {
   }
 });
 
-// it("fromOscMessage with string array argument works", () => {
-//   const oscAddress = toOscString("/stuff");
-//   const oscType = toOscString(",[s]");
-//   const oscArg = toOscString("argu");
-//   const { address, args } = fromOscMessage(
-//     concat([oscAddress, oscType, oscArg]),
-//   );
-//   if (args[0]?.type === "array") {
-//     expect(address).toBe("/stuff");
-//     expect(args[0].type).toBe("array");
-//     expect(args[0].value?.length).toBe(1);
-//     expect(args[0].value?.[0]?.type).toBe("string");
-//     expect(args[0].value?.[0]?.value).toBe("argu");
-//   }
-// });
+it("fromOscMessage with string array argument works", () => {
+  const oscAddress = toOscString("/stuff");
+  const oscType = toOscString(",[s]");
+  const oscArg = toOscString("argu");
+  const { address, args } = fromOscMessage(
+    concat([oscAddress, oscType, oscArg]),
+  );
+  if (args[0]?.type === "array") {
+    expect(address).toBe("/stuff");
+    expect(args[0].type).toBe("array");
+    expect(args[0].value?.length).toBe(1);
+    expect(args[0].value?.[0]?.type).toBe("string");
+    expect(args[0].value?.[0]?.value).toBe("argu");
+  }
+});
 
 it("fromOscMessage with nested array argument works", () => {
   const oscAddress = toOscString("/stuff");
