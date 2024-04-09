@@ -1,6 +1,8 @@
 import type { Timetag } from "src/types/Timetag";
 
-export type Arg =
+export type Arg = ArgType | ArgValue;
+
+export type ArgType =
   | {
       type: "string";
       value: string;
@@ -40,14 +42,11 @@ export type Arg =
   | {
       type: "bang";
       value: "bang";
-    };
-
-export type ArgRepresentation = Extract<Arg, {}>["type"];
-export type ArgValue = Extract<Arg, {}>["value"];
-
-export type OscMessageArg =
-  | Arg
+    }
   | {
       type: "array";
-      value: OscMessageArg[] | undefined;
+      value: ArgType[] | undefined;
     };
+
+export type ArgRepresentation = Extract<ArgType, {}>["type"];
+export type ArgValue = Extract<ArgType, {}>["value"];
