@@ -389,3 +389,21 @@ it("fromOscBundle works with no messages", () => {
   expect(timetag).toEqual(inputTimetag);
   expect(elements).toEqual([]);
 });
+
+it("fromOscBundle works with single message", () => {
+  const oscBundle = toOscString("#bundle");
+  const inputTimetag: Timetag = [0, 0];
+  const oscTimetag = toTimetagBuffer(inputTimetag);
+  const oscAddress = toOscString("/addr");
+  const oscType = toOscString(",");
+  const oscMessage = concat([oscAddress, oscType]);
+  const oscLength = toIntegerBuffer(oscMessage.length);
+  const buffer = concat([oscBundle, oscTimetag, oscLength, oscMessage]);
+  const { elements, timetag } = fromOscBundle(buffer);
+  expect(timetag).toEqual(inputTimetag);
+  expect(elements.length).toBe(1);
+  expect(elements[0]?.oscType).toBe("message");
+  if (elements[0]?.oscType === "message") {
+    expect(elements[0].address).toBe("/addr");
+  }
+});

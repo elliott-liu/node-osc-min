@@ -1,10 +1,15 @@
 import { mapBundleList } from "src/common";
-import { fromOscPacket, splitOscString, splitTimetag } from "src/osc-utilities";
+import {
+  fromOscPacket,
+  splitOscString,
+  splitTimetag,
+  type OscMessage,
+} from "src/osc-utilities";
 import type { Timetag } from "src/types";
 
 export type OscBundle = {
   timetag: Timetag;
-  elements: any;
+  elements: (OscBundle | OscMessage)[];
   oscType: "bundle";
 };
 
