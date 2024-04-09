@@ -15,6 +15,7 @@ import {
 } from "src";
 import type { Arg, ArgType, Timetag } from "src/types";
 import { isArgType, isArgTypeArray } from "src/helpers";
+import exp from "constants";
 
 type TestData = { string: string; expectedLength: number };
 
@@ -656,3 +657,14 @@ function bufferEquals(buffer: Buffer, expectedBuffer: Buffer) {
     expect(byte).toBe(expectedBuffer[index]);
   });
 }
+
+it("toOscMessage with bad layout works", () => {
+  const oscMessage: OscMessage = {
+    address: "/addr",
+    args: ["strr"],
+  };
+  const { address, args } = fromOscMessage(toOscMessage(oscMessage), true);
+  expect(address).toBe("/addr");
+  expect(args.length).toBe(1);
+  expect((args[0] as ArgType).value).toBe("strr");
+});
