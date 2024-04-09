@@ -135,4 +135,12 @@ it("splitOscString strict fails for string with invalid padding", () => {
   ).toThrowError();
 });
 
+it("concat throws when passed a single buffer", () => {
+  expect(() => concat(Buffer.from("test") as any)).toThrowError();
+});
+
+it("concat throws when passed an array of non-buffers", () => {
+  expect(() => concat(["bleh"] as any)).toThrowError();
+});
+
 });
