@@ -143,4 +143,8 @@ it("concat throws when passed an array of non-buffers", () => {
   expect(() => concat(["bleh"] as any)).toThrowError();
 });
 
+it("toIntegerBuffer throws when passed a non-number", () => {
+  expect(() => toIntegerBuffer("abcdefg" as any)).toThrowError();
+});
+
 });
