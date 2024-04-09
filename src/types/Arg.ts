@@ -45,7 +45,7 @@ export type ArgType =
     }
   | {
       type: "array";
-      value: ArgType[] | undefined;
+      value: ArgType[];
     };
 
 export type ArgRepresentation = Extract<ArgType, {}>["type"];
