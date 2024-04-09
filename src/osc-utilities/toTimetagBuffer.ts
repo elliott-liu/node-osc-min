@@ -15,7 +15,7 @@ export function toTimetagBuffer(
     timetag = dateToTimetag(timetag);
   } else if (timetag === null) {
     throw new Error("Timetag is null.");
-  } else if (timetag.length !== 2) {
+  } else if (!Array.isArray(timetag) || timetag.length !== 2) {
     throw new Error(`Invalid timetag: ${timetag}.`);
   }
 
@@ -23,7 +23,7 @@ export function toTimetagBuffer(
   high.writeUInt32BE(timetag[0], 0);
 
   const low = Buffer.alloc(4);
-  high.writeUInt32BE(timetag[1], 0);
+  low.writeUInt32BE(timetag[1], 0);
 
   return concat([high, low]);
 }

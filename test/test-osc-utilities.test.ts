@@ -250,18 +250,18 @@ it("fromOscMessage with integer argument works", () => {
   expect(args[0]?.value).toBe(888);
 });
 
-// it("fromOscMessage with integer argument works", () => {
-//   const oscAddress = toOscString("/stuff");
-//   const oscType = toOscString(",t");
-//   const timetag: Timetag = [8888, 9999];
-//   const oscArg = toTimetagBuffer(timetag);
-//   const { address, args } = fromOscMessage(
-//     concat([oscAddress, oscType, oscArg]),
-//   );
-//   expect(address).toBe("/stuff");
-//   expect(args[0]?.type).toBe("timetag");
-//   expect(args[0]?.value).toEqual(timetag);
-// });
+it("fromOscMessage with timetag argument works", () => {
+  const oscAddress = toOscString("/stuff");
+  const oscType = toOscString(",t");
+  const timetag: Timetag = [8888, 9999];
+  const oscArg = toTimetagBuffer(timetag);
+  const { address, args } = fromOscMessage(
+    concat([oscAddress, oscType, oscArg]),
+  );
+  expect(address).toBe("/stuff");
+  expect(args[0]?.type).toBe("timetag");
+  expect(args[0]?.value).toEqual(timetag);
+});
 
 it("fromOscMessage with mismatched array doesn't throw", () => {
   const oscAddress = toOscString("/stuff");
