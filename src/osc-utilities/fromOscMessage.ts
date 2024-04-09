@@ -85,7 +85,7 @@ export function fromOscMessage(
         if (lastArrayElement) {
           lastArrayElement.push({
             type: "array",
-            value: built,
+            value: built || [],
           });
         }
       }
