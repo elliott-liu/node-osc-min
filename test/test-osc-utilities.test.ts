@@ -506,3 +506,11 @@ it("fromOscBundle works with non-understood messages", () => {
     expect(element1.address).toBe("/addr1");
   }
 });
+
+it("fromOscBundle fails with bad bundle ID", () => {
+  const oscBundle = toOscString("#blunder");
+  const inputTimetag: Timetag = [0, 0];
+  const oscTimetag = toTimetagBuffer(inputTimetag);
+  const buffer = concat([oscBundle, oscTimetag]);
+  expect(() => fromOscBundle(buffer)).toThrow();
+});
