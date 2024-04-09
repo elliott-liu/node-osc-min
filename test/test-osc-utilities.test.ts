@@ -147,4 +147,8 @@ it("toIntegerBuffer throws when passed a non-number", () => {
   expect(() => toIntegerBuffer("abcdefg" as any)).toThrowError();
 });
 
+it("splitInteger fails when sent a buffer that's too small", () => {
+  expect(() => splitInteger(Buffer.alloc(3), "Int32")).toThrowError();
+});
+
 });
