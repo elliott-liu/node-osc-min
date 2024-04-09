@@ -76,7 +76,7 @@ export function fromOscMessage(
 
     // Special case: finished constructing an array
     if (type === "]") {
-      if (arrayStack.length <= 1) {
+      if (strict && arrayStack.length <= 1) {
         throw new StrictError("Mismatched ']' character.");
       } else {
         const built = arrayStack.pop();
@@ -115,7 +115,7 @@ export function fromOscMessage(
     }
   }
 
-  if (arrayStack.length !== 1 && strict) {
+  if (strict && arrayStack.length !== 1) {
     throw new StrictError("Mismatched '[' character");
   }
 
