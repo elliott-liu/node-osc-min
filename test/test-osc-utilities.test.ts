@@ -625,3 +625,30 @@ it("toOscMessage strict with null argument throws", () =>
   ).toThrowError());
 
 it("toOscMessage with string argument works", () => roundTripMessage(["strr"]));
+
+it("toOscMessage with empty array argument works", () =>
+  roundTripMessage([[]]));
+
+it("toOscMessage with array value works", () =>
+  roundTripMessage([{ type: "array", value: [] }]));
+
+it("toOscMessage with string array argument works", () =>
+  roundTripMessage([
+    [
+      { type: "string", value: "hello" },
+      { type: "string", value: "goodbye" },
+    ],
+  ]));
+
+it("toOscMessage with multi-type array argument works", () =>
+  roundTripMessage([
+    [
+      { type: "string", value: "hello" },
+      { type: "integer", value: 7 },
+    ],
+  ]));
+
+it("toOscMessage with nested array argument works", () =>
+  roundTripMessage([
+    [{ type: "array", value: [{ type: "string", value: "hello" }] }],
+  ]));
