@@ -339,3 +339,42 @@ it("fromOscMessage with nested array argument works", () => {
     }
   }
 });
+
+// it("fromOscMessage with multiple args works", () => {
+//   const oscAddress = toOscString("/stuff");
+//   const oscType = toOscString(",sbi");
+//   const oscArg = concat([
+//     toOscString("argu"),
+//     concat([toIntegerBuffer(4), Buffer.from("argu")]),
+//     toIntegerBuffer(888),
+//   ]);
+//   const { address, args } = fromOscMessage(
+//     concat([oscAddress, oscType, oscArg]),
+//   );
+
+//   expect(address).toBe("/stuff");
+//   expect(args[0]?.type).toBe("string");
+//   expect(args[0]?.value).toBe("argu");
+// });
+
+it("fromOscMessage strict fails if type string has no comma", () => {
+  const oscAddress = toOscString("/stuff");
+  const oscType = toOscString("fake");
+  const oscMessage = concat([oscAddress, oscType]);
+  expect(() => fromOscMessage(oscMessage, true)).toThrowError();
+});
+
+it("fromOscMessage non-strict works if type string has no comma", () => {
+  const oscAddress = toOscString("/stuff");
+  const oscType = toOscString("fake");
+  const { address, args } = fromOscMessage(concat([oscAddress, oscType]));
+  expect(address).toBe("/stuff");
+  expect(args.length).toBe(0);
+});
+
+it("fromOscMessage strict fails if type address doesn't begin with /", () => {
+  const oscAddress = toOscString("stuff");
+  const oscType = toOscString(",");
+  const oscMessage = concat([oscAddress, oscType]);
+  expect(() => fromOscMessage(oscMessage, true)).toThrowError();
+});
