@@ -9,6 +9,7 @@ import {
   fromOscMessage,
   toTimetagBuffer,
   fromOscBundle,
+  toOscArgument,
 } from "src";
 import type { Timetag } from "src/types";
 
@@ -523,3 +524,8 @@ it("fromOscBundle fails with ridiculous sizes", () => {
   const buffer = concat([oscBundle, oscTimetag, oscFakeLength]);
   expect(() => fromOscBundle(buffer)).toThrow();
 });
+
+it("toOscArgument fails when given bogus type", () => {
+  expect(() => toOscArgument("bleh", "bogus")).toThrowError();
+});
+
