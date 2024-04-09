@@ -104,4 +104,35 @@ it("splitOscString works with an over-allocated buffer", () => {
   expect(rest.length).toBe(4);
 });
 
+it("splitOscString works with just a string by default", () => {
+  const { rest, string } = splitOscString(Buffer.from("testing it"));
+  expect(string).toBe("testing it");
+  expect(rest.length).toBe(0);
+});
+
+it("splitOscString strict fails for just a string", () => {
+  expect(() => splitOscString(Buffer.from("testing it"), true)).toThrowError();
+});
+
+// it("splitOscString strict fails for string with not enough padding", () => {
+//   expect(() =>
+//     splitOscString(Buffer.from("testing \u0000\u0000"), true),
+//   ).toThrowError();
+// });
+
+it("splitOscString strict fails for string with not enough padding", () => {
+  const { rest, string } = splitOscString(
+    Buffer.from("testing it\u0000\u0000aaaa"),
+    true,
+  );
+  expect(string).toBe("testing it");
+  expect(rest.length).toBe(4);
+});
+
+it("splitOscString strict fails for string with invalid padding", () => {
+  expect(() =>
+    splitOscString(Buffer.from("testing it\u0000aaaaa"), true),
+  ).toThrowError();
+});
+
 });
