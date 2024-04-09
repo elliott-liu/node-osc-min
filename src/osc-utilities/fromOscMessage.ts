@@ -4,11 +4,11 @@ import {
   splitOscString,
   oscTypeCodeToTypeString,
 } from "src/osc-utilities";
-import type { OscMessageArg } from "src/types";
+import type { Arg, ArgType } from "src/types";
 
 export type OscMessage = {
   address: string;
-  args: OscMessageArg[];
+  args: Arg[];
   oscType?: "message";
 };
 
@@ -60,7 +60,7 @@ export function fromOscMessage(
   // Remove the comma from the types string
   const typesWithoutComma = types.slice(1);
 
-  const args: OscMessageArg[] = [];
+  const args: ArgType[] = [];
 
   // We use this to build up array arguments
   // arrayStack[-1] is always the currently constructing array
