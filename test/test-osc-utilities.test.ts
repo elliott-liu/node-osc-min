@@ -341,22 +341,22 @@ it("fromOscMessage with nested array argument works", () => {
   }
 });
 
-// it("fromOscMessage with multiple args works", () => {
-//   const oscAddress = toOscString("/stuff");
-//   const oscType = toOscString(",sbi");
-//   const oscArg = concat([
-//     toOscString("argu"),
-//     concat([toIntegerBuffer(4), Buffer.from("argu")]),
-//     toIntegerBuffer(888),
-//   ]);
-//   const { address, args } = fromOscMessage(
-//     concat([oscAddress, oscType, oscArg]),
-//   );
+it("fromOscMessage with multiple args works", () => {
+  const oscAddress = toOscString("/stuff");
+  const oscType = toOscString(",sbi");
+  const oscArg = concat([
+    toOscString("argu"),
+    concat([toIntegerBuffer(4), Buffer.from("argu")]),
+    toIntegerBuffer(888),
+  ]);
+  const { address, args } = fromOscMessage(
+    concat([oscAddress, oscType, oscArg]),
+  );
 
-//   expect(address).toBe("/stuff");
-//   expect(args[0]?.type).toBe("string");
-//   expect(args[0]?.value).toBe("argu");
-// });
+  expect(address).toBe("/stuff");
+  expect(args[0]?.type).toBe("string");
+  expect(args[0]?.value).toBe("argu");
+});
 
 it("fromOscMessage strict fails if type string has no comma", () => {
   const oscAddress = toOscString("/stuff");
