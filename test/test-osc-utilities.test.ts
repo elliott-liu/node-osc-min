@@ -116,11 +116,11 @@ it("splitOscString strict fails for just a string", () => {
   expect(() => splitOscString(Buffer.from("testing it"), true)).toThrowError();
 });
 
-// it("splitOscString strict fails for string with not enough padding", () => {
-//   expect(() =>
-//     splitOscString(Buffer.from("testing \u0000\u0000"), true),
-//   ).toThrowError();
-// });
+it("splitOscString strict fails for string with not enough padding", () => {
+  expect(() =>
+    splitOscString(Buffer.from("testing \u0000\u0000"), true),
+  ).toThrowError();
+});
 
 it("splitOscString strict fails for string with not enough padding", () => {
   const { rest, string } = splitOscString(

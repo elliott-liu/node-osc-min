@@ -6,5 +6,5 @@
  */
 export function padding(string: string): number {
   const length = Buffer.byteLength(string);
-  return (4 - (length % 4)) % 4;
+  return 4 - (length % 4);
 }
