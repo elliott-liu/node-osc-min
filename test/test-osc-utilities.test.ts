@@ -151,4 +151,8 @@ it("splitInteger fails when sent a buffer that's too small", () => {
   expect(() => splitInteger(Buffer.alloc(3), "Int32")).toThrowError();
 });
 
+it("splitOscArgument fails when given a bogus type", () => {
+  expect(() => splitOscArgument(Buffer.alloc(8), "bogus")).toThrowError();
+});
+
 });
