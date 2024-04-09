@@ -698,3 +698,15 @@ it("toOscMessage with single blob argument works", () => {
     bufferEquals(argument1?.value, buffer);
   }
 });
+
+it("toOscMessage with single string argument works", () => {
+  const oscMessage: OscMessage = {
+    address: "/addr",
+    args: "strr",
+  };
+  const { address, args } = fromOscMessage(toOscMessage(oscMessage), true);
+  expect(address).toBe("/addr");
+  expect((args as ArgType[]).length).toBe(1);
+  expect(((args as ArgType[])[0] as ArgType).type).toBe("string");
+  expect(((args as ArgType[])[0] as ArgType).value).toBe("strr");
+});
