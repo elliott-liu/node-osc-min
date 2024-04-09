@@ -554,3 +554,8 @@ function roundTripMessage(args: OscMessageArg[]) {
 
 // We tested fromOsc* manually, so just use roundtrip testing for toOsc*
 it("toOscMessage with no args works", () => roundTripMessage([]));
+
+it("toOscMessage strict with null argument throws", () =>
+  expect(() =>
+    toOscMessage({ address: "/addr", args: [null as any] }, true),
+  ).toThrowError());
