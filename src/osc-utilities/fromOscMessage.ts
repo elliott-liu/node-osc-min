@@ -8,7 +8,7 @@ import type { Arg, ArgType } from "src/types";
 
 export type OscMessage = {
   address: string;
-  args: Arg[];
+  args: Arg[] | Arg;
   oscType?: "message";
 };
 
