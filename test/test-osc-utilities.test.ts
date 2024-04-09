@@ -9,6 +9,7 @@ import {
   fromOscMessage,
   toTimetagBuffer,
 } from "src";
+import type { Timetag } from "src/types";
 
 type TestData = { string: string; expectedLength: number };
 
