@@ -710,3 +710,30 @@ it("toOscMessage with single string argument works", () => {
   expect(((args as ArgType[])[0] as ArgType).type).toBe("string");
   expect(((args as ArgType[])[0] as ArgType).value).toBe("strr");
 });
+
+it("toOscMessage with integer argument works", () => {
+  roundTripMessage([8]);
+});
+
+it("toOscMessage with buffer argument works", () => {
+  // Buffer will have random contents, but that's okay
+  roundTripMessage([Buffer.alloc(16)]);
+});
+
+it("toOscMessage strict with type true and value false throws", () => {
+  expect(() =>
+    toOscMessage(
+      { address: "/addr/", args: { type: "false", value: true as false } },
+      true,
+    ),
+  ).toThrowError();
+});
+
+it("toOscMessage strict with type false with value true throws", () => {
+  expect(() =>
+    toOscMessage(
+      { address: "/addr/", args: { type: "true", value: false as true } },
+      true,
+    ),
+  ).toThrowError();
+});
