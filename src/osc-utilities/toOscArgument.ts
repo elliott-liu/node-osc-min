@@ -19,6 +19,6 @@ export function toOscArgument(
   if (oscTypeCode) {
     return oscTypeCodes[oscTypeCode].toArg(value, strict);
   } else {
-    throw new Error(`I don't know how to pack ${type}.`);
+    throw new Error(`I don't know how to pack '${type}'.`);
   }
 }
