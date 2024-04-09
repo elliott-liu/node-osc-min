@@ -197,8 +197,9 @@ it("fromOscMessage with true argument works", () => {
   const oscAddress = toOscString("/stuff");
   const oscType = toOscString(",T");
   const { address, args } = fromOscMessage(concat([oscAddress, oscType]));
-  const [argument1] = args;
   expect(address).toBe("/stuff");
+  const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
     expect(argument1.type).toBe("true");
     expect(argument1.value).toBe(true);
@@ -210,8 +211,9 @@ it("fromOscMessage with false argument works", () => {
   const oscType = toOscString(",F");
   const translate = fromOscMessage(concat([oscAddress, oscType]));
   const { address, args } = translate;
-  const [argument1] = args;
   expect(address).toBe("/stuff");
+  const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
     expect(argument1.type).toBe("false");
     expect(argument1.value).toBe(false);
@@ -223,8 +225,9 @@ it("fromOscMessage with null argument works", () => {
   const oscType = toOscString(",N");
   const translate = fromOscMessage(concat([oscAddress, oscType]));
   const { address, args } = translate;
-  const [argument1] = args;
   expect(address).toBe("/stuff");
+  const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
     expect(argument1.type).toBe("null");
     expect(argument1.value).toBe(null);
@@ -235,8 +238,9 @@ it("fromOscMessage with bang argument works", () => {
   const oscAddress = toOscString("/stuff");
   const oscType = toOscString(",I");
   const { address, args } = fromOscMessage(concat([oscAddress, oscType]));
-  const [argument1] = args;
   expect(address).toBe("/stuff");
+  const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
     expect(argument1.type).toBe("bang");
     expect(argument1.value).toBe("bang");
@@ -250,11 +254,12 @@ it("fromOscMessage with blob argument works", () => {
   const { address, args } = fromOscMessage(
     concat([oscAddress, oscType, oscArg]),
   );
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
+    expect(argument1.type).toBe("blob");
     if (argument1.type === "blob") {
-      expect(address).toBe("/stuff");
-      expect(argument1.type).toBe("blob");
       expect(argument1.value.toString("utf-8")).toBe("argu");
     }
   }
@@ -267,9 +272,10 @@ it("fromOscMessage with integer argument works", () => {
   const { address, args } = fromOscMessage(
     concat([oscAddress, oscType, oscArg]),
   );
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
-    expect(address).toBe("/stuff");
     expect(argument1.type).toBe("integer");
     expect(argument1.value).toBe(888);
   }
@@ -283,9 +289,10 @@ it("fromOscMessage with timetag argument works", () => {
   const { address, args } = fromOscMessage(
     concat([oscAddress, oscType, oscArg]),
   );
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
-    expect(address).toBe("/stuff");
     expect(argument1.type).toBe("timetag");
     expect(argument1.value).toEqual(timetag);
   }
@@ -315,14 +322,13 @@ it("fromOscMessage with empty array argument works", () => {
   const oscAddress = toOscString("/stuff");
   const oscType = toOscString(",[]");
   const { address, args } = fromOscMessage(concat([oscAddress, oscType]));
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
-    if (argument1.type === "array") {
-      expect(address).toBe("/stuff");
-      expect(argument1.type).toBe("array");
-      expect(argument1.value?.length).toBe(0);
-      expect(argument1.value).toEqual([]);
-    }
+    expect(argument1.type).toBe("array");
+    expect((argument1.value as ArgType[]).length).toBe(0);
+    expect(argument1.value).toEqual([]);
   }
 });
 
@@ -330,20 +336,15 @@ it("fromOscMessage with bang array argument works", () => {
   const oscAddress = toOscString("/stuff");
   const oscType = toOscString(",[I]");
   const { address, args } = fromOscMessage(concat([oscAddress, oscType]));
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
+    expect(argument1.type).toBe("array");
     if (argument1.type === "array") {
-      expect(address).toBe("/stuff");
-      expect(argument1.type).toBe("array");
-      expect(argument1.value?.length).toBe(1);
-      const nestedArguments = argument1.value;
-      if (nestedArguments) {
-        const [nestedArgument1] = nestedArguments;
-        if (isArgType(nestedArgument1)) {
-          expect(nestedArgument1.type).toBe("bang");
-          expect(nestedArgument1.value).toBe("bang");
-        }
-      }
+      expect(argument1.value.length).toBe(1);
+      expect((argument1.value[0] as ArgType).type).toBe("bang");
+      expect((argument1.value[0] as ArgType).value).toBe("bang");
     }
   }
 });
@@ -355,20 +356,15 @@ it("fromOscMessage with string array argument works", () => {
   const { address, args } = fromOscMessage(
     concat([oscAddress, oscType, oscArg]),
   );
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
+    expect(argument1.type).toBe("array");
     if (argument1.type === "array") {
-      expect(address).toBe("/stuff");
-      expect(argument1.type).toBe("array");
-      expect(argument1.value?.length).toBe(1);
-      const nestedArguments = argument1.value;
-      if (nestedArguments) {
-        const [nestedArgument1] = nestedArguments;
-        if (isArgType(nestedArgument1)) {
-          expect(nestedArgument1.type).toBe("string");
-          expect(nestedArgument1.value).toBe("argu");
-        }
-      }
+      expect(argument1.value.length).toBe(1);
+      expect((argument1.value[0] as ArgType).type).toBe("string");
+      expect((argument1.value[0] as ArgType).value).toBe("argu");
     }
   }
 });
@@ -377,29 +373,18 @@ it("fromOscMessage with nested array argument works", () => {
   const oscAddress = toOscString("/stuff");
   const oscType = toOscString(",[[I]]");
   const { address, args } = fromOscMessage(concat([oscAddress, oscType]));
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
+    expect(argument1.type).toBe("array");
     if (argument1.type === "array") {
-      expect(address).toBe("/stuff");
-      expect(argument1.type).toBe("array");
-      expect(argument1.value?.length).toBe(1);
-      const nestedArguments = argument1.value;
-      if (nestedArguments) {
-        const [nestedArgument1] = nestedArguments;
-        if (isArgType(nestedArgument1)) {
-          if (nestedArgument1.type === "array") {
-            expect(nestedArgument1.type).toBe("array");
-            expect(nestedArgument1.value?.length).toBe(1);
-            const nestedNestedArguments = nestedArgument1.value;
-            if (nestedNestedArguments) {
-              const [nestedNestedArgument1] = nestedNestedArguments;
-              if (isArgType(nestedNestedArgument1)) {
-                expect(nestedNestedArgument1.type).toBe("bang");
-                expect(nestedNestedArgument1.value).toBe("bang");
-              }
-            }
-          }
-        }
+      expect(argument1.value.length).toBe(1);
+      expect(argument1.value[0]?.type).toBe("array");
+      if (argument1.value[0]?.type === "array") {
+        expect(argument1.value[0].value.length).toBe(1);
+        expect(argument1.value[0].value[0]?.type).toBe("bang");
+        expect(argument1.value[0].value[0]?.value).toBe("bang");
       }
     }
   }
@@ -416,9 +401,10 @@ it("fromOscMessage with multiple args works", () => {
   const { address, args } = fromOscMessage(
     concat([oscAddress, oscType, oscArg]),
   );
+  expect(address).toBe("/stuff");
   const [argument1] = args;
+  expect(isArgType(argument1)).toBe(true);
   if (isArgType(argument1)) {
-    expect(address).toBe("/stuff");
     expect(argument1.type).toBe("string");
     expect(argument1.value).toBe("argu");
   }
@@ -635,7 +621,7 @@ it("toOscMessage with no args works", () => roundTripMessage([]));
 
 it("toOscMessage strict with null argument throws", () =>
   expect(() =>
-    toOscMessage({ address: "/addr", args: [null as any] }, true),
+    toOscMessage({ address: "/addr", args: [null] }, true),
   ).toThrowError());
 
 it("toOscMessage with string argument works", () => roundTripMessage(["strr"]));
