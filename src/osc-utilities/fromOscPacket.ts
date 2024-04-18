@@ -15,7 +15,7 @@ import {
  */
 export function fromOscPacket(
   buffer: Buffer,
-  strict: boolean,
+  strict: boolean = false,
 ): OscMessage | OscBundle {
   if (isOscBundleBuffer(buffer, strict)) {
     return fromOscBundle(buffer, strict);
