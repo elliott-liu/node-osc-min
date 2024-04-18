@@ -5,10 +5,7 @@ import {
   toIntegerBuffer,
   toOscString,
 } from "src/osc-utilities";
-
-export type MessageTransform = {
-  (buffer: Buffer): Buffer;
-};
+import type { MessageTransform } from "src/types";
 
 /**
  * Helper function for transforming all messages in a bundle with a given message transform.

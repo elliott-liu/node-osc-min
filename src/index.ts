@@ -4,11 +4,13 @@ import {
   fromOscPacket,
   messageTransform,
   toOscPacket,
-  type OscBundle,
-  type OscMessage,
-  type TransformAddress,
-  type TransformMessage,
 } from "src/osc-utilities";
+import type {
+  OscBundle,
+  OscMessage,
+  TransformAddress,
+  TransformMessage,
+} from "src/types";
 
 export function fromBuffer(
   buffer: Buffer,

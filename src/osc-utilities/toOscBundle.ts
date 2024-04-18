@@ -4,8 +4,8 @@ import {
   toOscPacket,
   toOscString,
   toTimetagBuffer,
-  type OscBundle,
 } from "src/osc-utilities";
+import type { OscBundle } from "src/types";
 
 /**
  * Convert a JavaScript format bundle into an OSC buffer.

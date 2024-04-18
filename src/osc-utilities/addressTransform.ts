@@ -1,11 +1,5 @@
-import {
-  concat,
-  splitOscString,
-  toOscString,
-  type MessageTransform,
-} from "src/osc-utilities";
-
-export type TransformAddress = (address: string) => string;
+import { concat, splitOscString, toOscString } from "src/osc-utilities";
+import type { MessageTransform, TransformAddress } from "src/types";
 
 /**
  * Converts a JavaScript function from string to string to a function from message buffer to message buffer, applying the function to the parsed strings.

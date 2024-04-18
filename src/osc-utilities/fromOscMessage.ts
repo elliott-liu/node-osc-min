@@ -4,13 +4,7 @@ import {
   splitOscString,
   oscTypeCodeToTypeString,
 } from "src/osc-utilities";
-import type { Arg, ArgType } from "src/types";
-
-export type OscMessage = {
-  address: string;
-  args: Arg[] | Arg;
-  oscType?: "message";
-};
+import type { ArgType, OscMessage } from "src/types";
 
 /**
  * Translates an OSC message into a JavaScript representation.

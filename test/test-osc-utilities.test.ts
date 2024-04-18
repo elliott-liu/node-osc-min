@@ -9,11 +9,9 @@ import {
   fromOscMessage,
   toTimetagBuffer,
   fromOscBundle,
-  type OscMessage,
   toOscMessage,
   toOscArgument,
   toOscBundle,
-  type OscBundle,
   applyTransform,
   toOscPacket,
   fromOscPacket,
@@ -27,7 +25,7 @@ import {
   timetagToTimestamp,
   splitTimetag,
 } from "src";
-import type { Arg, ArgType, Timetag } from "src/types";
+import type { Arg, ArgType, Timetag, OscMessage, OscBundle } from "src/types";
 import { isArgType } from "src/helpers";
 
 type TestData = { string: string; expectedLength: number };
@@ -992,7 +990,7 @@ describe("toOscMessage", () => {
   });
 
   it("just a string works", () => {
-    const { address, args } = fromOscMessage(toOscMessage("bleh"));
+    const { address, args } = fromOscMessage(toOscMessage("bleh")); // TODO
     expect((args as ArgType[]).length).toBe(0);
     expect(address).toBe("bleh");
   });

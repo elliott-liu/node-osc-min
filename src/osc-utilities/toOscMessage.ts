@@ -1,6 +1,6 @@
 import { toOscTypeAndArgs } from "src/common";
-import { concat, toOscString, type OscMessage } from "src/osc-utilities";
-import type { Arg } from "src/types";
+import { concat, toOscString } from "src/osc-utilities";
+import type { Arg, OscMessage } from "src/types";
 
 /**
  * Convert a JavaScript format message into an OSC buffer.

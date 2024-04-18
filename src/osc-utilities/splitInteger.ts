@@ -1,10 +1,5 @@
 import { StrictError } from "src/common";
-import type { BufferType } from "src/types";
-
-export type SplitIntegerResult = {
-  integer: number;
-  rest: Buffer;
-};
+import type { BufferType, SplitInteger } from "src/types";
 
 /**
  * Splits an integer value from a buffer based on the specified type.
@@ -19,7 +14,7 @@ export type SplitIntegerResult = {
 export function splitInteger(
   buffer: Buffer,
   type: BufferType = "Int32",
-): SplitIntegerResult {
+): SplitInteger {
   let bytes: number;
   let value: number;
 
@@ -32,6 +27,10 @@ export function splitInteger(
       bytes = 4;
       value = buffer.readFloatBE(0);
       break;
+    case "Int64":
+      bytes = 8;
+      value = Number(buffer.readBigInt64BE(0));
+      break;
     case "Int32":
       bytes = 4;
       value = buffer.readInt32BE(0);
@@ -43,6 +42,10 @@ export function splitInteger(
     case "Int8":
       bytes = 1;
       value = buffer.readInt8(0);
+      break;
+    case "UInt64":
+      bytes = 8;
+      value = Number(buffer.readBigUint64BE(0));
       break;
     case "UInt32":
       bytes = 4;

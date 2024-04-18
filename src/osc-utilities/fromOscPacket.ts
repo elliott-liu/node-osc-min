@@ -1,10 +1,6 @@
 import { isOscBundleBuffer } from "src/common";
-import {
-  fromOscBundle,
-  fromOscMessage,
-  type OscBundle,
-  type OscMessage,
-} from "src/osc-utilities";
+import { fromOscBundle, fromOscMessage } from "src/osc-utilities";
+import type { OscBundle, OscMessage } from "src/types";
 
 /**
  * Convert the buffer into a bundle or a message, depending on the first string.

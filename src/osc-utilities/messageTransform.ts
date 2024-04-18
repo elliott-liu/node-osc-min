@@ -1,10 +1,5 @@
-import {
-  fromOscMessage,
-  toOscMessage,
-  type MessageTransform,
-} from "src/osc-utilities";
-
-export type TransformMessage = (message: any) => any;
+import { fromOscMessage, toOscMessage } from "src/osc-utilities";
+import type { MessageTransform, TransformMessage } from "src/types";
 
 /**
  * Take a function that transforms a JavaScript _OSC Message_ and convert it to a function that transforms OSC buffers.

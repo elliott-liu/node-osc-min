@@ -1,17 +1,6 @@
 import { mapBundleList } from "src/common";
-import {
-  fromOscPacket,
-  splitOscString,
-  splitTimetag,
-  type OscMessage,
-} from "src/osc-utilities";
-import type { Timetag } from "src/types";
-
-export type OscBundle = {
-  timetag: Timetag;
-  elements: (OscBundle | OscMessage)[];
-  oscType: "bundle";
-};
+import { fromOscPacket, splitOscString, splitTimetag } from "src/osc-utilities";
+import type { OscBundle } from "src/types";
 
 /**
  * Try to parse an OSC bundle into a JavaScript object.
