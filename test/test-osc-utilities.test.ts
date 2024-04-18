@@ -1263,3 +1263,11 @@ describe("toTimetagBuffer", () => {
   });
 });
 
+describe("deltaTimetag", () => {
+  it("makes array from a delta", () => {
+    const delta = 1.2345;
+    const ntp = deltaTimetag(delta);
+    expect(ntp).toBeInstanceOf(Array);
+  });
+});
+
