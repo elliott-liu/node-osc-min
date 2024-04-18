@@ -1280,3 +1280,12 @@ describe("timetagToDate", () => {
   });
 });
 
+describe("timestampToTimetag", () => {
+  it("converts a unix time to ntp array", () => {
+    const date = new Date();
+    const timetag = timestampToTimetag(date.getTime() / 1000);
+    const roundTripDate = timetagToDate(timetag);
+    assertDatesEqual(date, roundTripDate);
+  });
+});
+
