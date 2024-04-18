@@ -1139,3 +1139,20 @@ describe("applyTransform", () => {
   });
 });
 
+describe("toOscPacket", () => {
+  it("works when explicitly set to bundle", () => {
+    const { elements } = fromOscBundle(
+      toOscPacket({ timetag: [0, 0], oscType: "bundle", elements: [] }, true), // TODO Deviation from original test on Timetag
+    );
+    expect(elements.length).toBe(0);
+  });
+
+  it("works when explicitly set to message", () => {
+    const { address, args } = fromOscPacket(
+      toOscPacket({ address: "/bleh", oscType: "message", args: [] }, true),
+    ) as OscMessage;
+    expect((args as Arg[]).length).toBe(0);
+    expect(address).toBe("/bleh");
+  });
+});
+
