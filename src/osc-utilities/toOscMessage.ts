@@ -1,5 +1,6 @@
 import { toOscTypeAndArgs } from "src/common";
 import { concat, toOscString, type OscMessage } from "src/osc-utilities";
+import type { Arg } from "src/types";
 
 /**
  * Convert a JavaScript format message into an OSC buffer.
@@ -19,10 +20,7 @@ export function toOscMessage(
     throw new Error("Message must contain an address.");
   }
 
-  let args: any[] = message?.args;
-  if (args === undefined) {
-    args = [];
-  }
+  let args: Arg | Arg[] = message?.args || [];
 
   // Pack single args
   if (!Array.isArray(args)) {
