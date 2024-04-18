@@ -1271,3 +1271,12 @@ describe("deltaTimetag", () => {
   });
 });
 
+describe("timetagToDate", () => {
+  it("converts timetag to a Date", () => {
+    const date = new Date();
+    const timetag = dateToTimetag(date);
+    const roundTripDate = timetagToDate(timetag);
+    assertDatesEqual(date, roundTripDate);
+  });
+});
+
