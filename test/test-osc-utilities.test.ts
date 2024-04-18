@@ -1202,3 +1202,35 @@ describe("addressTransform", () => {
   });
 });
 
+describe("messageTransform", () => {
+  it("works with identity function for single message", () => {
+    const message: OscMessage = {
+      address: "/addr",
+      args: [],
+    };
+    const buffer = toOscPacket(message);
+    bufferEquals(
+      applyTransform(
+        buffer,
+        messageTransform((a) => a),
+      ),
+      buffer,
+    );
+  });
+
+  it("works with bundles", { todo: true }, () => {
+    const bundle: OscBundle = {
+      timetag: [0, 0],
+      elements: [{ address: "test1" }, { address: "test2" }],
+    };
+    const buffer = toOscPacket(bundle);
+    bufferEquals(
+      applyTransform(
+        buffer,
+        messageTransform((a) => a),
+      ),
+      buffer,
+    );
+  });
+});
+
