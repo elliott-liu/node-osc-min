@@ -79,11 +79,15 @@ describe("splitOscString", () => {
 });
 
 describe("fromOscString", () => {
-  // it("strict fails for osc buffers with non-null characters after a null character", () => {
-  //   expect(() =>
-  //     fromOscString(Buffer.from("abc\u0000abcd") as any, true),
-  //   ).toThrowError();
-  // });
+  it(
+    "strict fails for osc buffers with non-null characters after a null character",
+    { todo: true },
+    () => {
+      expect(() =>
+        fromOscString(Buffer.from("abc\u0000abcd") as any, true),
+      ).toThrowError();
+    },
+  );
 
   describe("strict passes for basic strings", () => {
     testData.forEach(({ string }) => {
@@ -93,11 +97,15 @@ describe("fromOscString", () => {
     });
   });
 
-  // it("strict fails for osc buffers with non-four length", () => {
-  //   expect(() =>
-  //     fromOscString(Buffer.from("abcd\u0000\u0000"), true),
-  //   ).toThrowError();
-  // });
+  it(
+    "strict fails for osc buffers with non-four length",
+    { todo: true },
+    () => {
+      expect(() =>
+        fromOscString(Buffer.from("abcd\u0000\u0000"), true),
+      ).toThrowError();
+    },
+  );
 });
 
 describe("splitOscString", () => {
