@@ -599,6 +599,13 @@ describe("fromOscBundle", () => {
   });
 });
 
+// We tested fromOsc* manually, so just use roundtrip testing for toOsc*
+describe("toOscArgument", () => {
+  it("fails when given bogus type", () => {
+    expect(() => toOscArgument("bleh", "bogus")).toThrowError();
+  });
+});
+
 function roundTripMessage(args: Arg[]): void {
   const oscMessage: OscMessage = {
     address: "/addr",
@@ -641,12 +648,9 @@ function bufferEquals(buffer: Buffer, expectedBuffer: Buffer) {
   });
 }
 
-// We tested fromOsc* manually, so just use roundtrip testing for toOsc*
-describe("toOscArgument", () => {
-  it("fails when given bogus type", () => {
-    expect(() => toOscArgument("bleh", "bogus")).toThrowError();
-  });
-});
+function toOscMessageThrowsHelper(arg: Arg) {
+  expect(() => toOscMessage({ address: "/addr", args: [arg] })).toThrowError();
+}
 
 describe("toOscMessage", () => {
   it("no args works", () => roundTripMessage([]));
@@ -967,8 +971,47 @@ describe("toOscMessage", () => {
   });
 
   it("just a string works", () => {
-    const { address, args } = fromOscMessage(toOscMessage("bleh" as any));
+    const { address, args } = fromOscMessage(toOscMessage("bleh"));
     expect((args as ArgType[]).length).toBe(0);
     expect(address).toBe("bleh");
+  });
+
+  it("multiple args works", () => {
+    roundTripMessage(["str", 7, Buffer.alloc(30), 6]);
+  });
+
+  it("integer argument works", () => {
+    roundTripMessage([{ value: 7, type: "integer" }]);
+  });
+
+  it("fails with no address", () => {
+    expect(() => toOscMessage({ args: [] } as any)).toThrowError();
+  });
+
+  it("fails when string type is specified but wrong", () => {
+    toOscMessageThrowsHelper({ value: 7, type: "string" as any });
+  });
+
+  it("fails when integer type is specified but wrong", () => {
+    toOscMessageThrowsHelper({ value: "blah blah", type: "integer" as any });
+  });
+
+  it("fails when float type is specified but wrong", () => {
+    toOscMessageThrowsHelper({ value: "blah blah", type: "float" as any });
+  });
+
+  it("fails when timetag type is specified but wrong", () => {
+    toOscMessageThrowsHelper({ value: "blah blah", type: "timetag" as any });
+  });
+
+  it("fails when double type is specified but wrong", () => {
+    toOscMessageThrowsHelper({ value: "blah blah", type: "double" as any });
+  });
+
+  it("fails argument is a random type", () => {
+    toOscMessageThrowsHelper({
+      random_field: 42,
+      "is pretty random": 888,
+    } as any);
   });
 });
