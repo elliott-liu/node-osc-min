@@ -1298,3 +1298,12 @@ describe("dateToTimetag", () => {
   });
 });
 
+it("timestamp <-> round trip", () => {
+  const now = new Date().getTime() / 1000;
+  const near = (a: number, b: number) => Math.abs(a - b) < 1e-6;
+  expect(near(timetagToTimestamp(timestampToTimetag(now)), now)).toBe(true);
+});
+
+  });
+});
+
