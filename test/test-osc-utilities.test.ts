@@ -1304,6 +1304,12 @@ it("timestamp <-> round trip", () => {
   expect(near(timetagToTimestamp(timestampToTimetag(now)), now)).toBe(true);
 });
 
+describe("splitTimetag", () => {
+  it("returns timetag from a buffer", () => {
+    const timetag: Timetag = [1000, 1001];
+    const rest = "the rest";
+    const buffer = concat([toTimetagBuffer(timetag), Buffer.from(rest)]);
+    const { timetag: roundTripTimetag } = splitTimetag(buffer);
+    expect(roundTripTimetag).toEqual(timetag);
   });
 });
-
