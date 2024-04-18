@@ -14,10 +14,21 @@ import {
   toOscArgument,
   toOscBundle,
   type OscBundle,
+  applyTransform,
+  toOscPacket,
+  fromOscPacket,
+  applyMessageTransformerToBundle,
+  addressTransform,
+  messageTransform,
+  deltaTimetag,
+  dateToTimetag,
+  timetagToDate,
+  timestampToTimetag,
+  timetagToTimestamp,
+  splitTimetag,
 } from "src";
 import type { Arg, ArgType, Timetag } from "src/types";
-import { isArgType, isArgTypeArray } from "src/helpers";
-import exp from "constants";
+import { isArgType } from "src/helpers";
 
 type TestData = { string: string; expectedLength: number };
 
@@ -1093,3 +1104,38 @@ describe("toOscBundle", () => {
     expect(() => toOscBundle({ elements: [] }, true)).toThrowError();
   });
 });
+
+describe("applyTransform", () => {
+  it("works with single message", () => {
+    const testBuffer = toOscString("/message");
+    expect(applyTransform(testBuffer, (a) => Buffer.alloc(0).length)).toBe(0);
+  });
+
+  it("works when explicitly set to bundle", () => {
+    const testBuffer = toOscString("/message");
+    expect(applyTransform(testBuffer, (a) => a)).toBe(testBuffer);
+  });
+
+  it("works with a simple bundle", { todo: true }, () => {
+    const base: OscBundle = {
+      timetag: [0, 0],
+      elements: [{ address: "test1" }, { address: "test2" }],
+      oscType: "bundle",
+    };
+    const transform = applyTransform(toOscPacket(base), (a) => a);
+    const { elements, oscType, timetag } = fromOscPacket(
+      transform,
+    ) as OscBundle;
+    expect(timetag).toEqual([0, 0]);
+    expect(elements.length).toBe(base.elements.length);
+    elements.forEach((element, index) => {
+      expect((element as OscBundle)?.timetag).toBe(
+        (base.elements[index] as OscBundle).timetag,
+      );
+      expect((element as OscMessage)?.address).toBe(
+        (base.elements[index] as OscMessage).address,
+      );
+    });
+  });
+});
+
