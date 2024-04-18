@@ -1061,4 +1061,35 @@ describe("toOscBundle", () => {
   it("no elements works", () => {
     roundTripBundle([]);
   });
+
+  it("just a string works", () => {
+    roundTripBundle("/address");
+  });
+
+  it("just a number fails", () => {
+    expect(() => roundTripBundle(78)).toThrowError();
+  });
+
+  it("one message works", () => {
+    roundTripBundle([{ address: "/addr" }]);
+  });
+
+  it("nested bundles works", () => {
+    roundTripBundle([{ address: "/addr" }, { timetag: [8888, 9999] }]);
+  });
+
+  it("bogus packets works", () => {
+    const { elements, timetag } = fromOscBundle(
+      toOscBundle({
+        timetag: [0, 0],
+        elements: [{ timetag: [0, 0] }, { maddress: "/addr" }],
+      }),
+    );
+    expect(elements.length).toBe(1);
+    expect(elements[0].timetag).toEqual([0, 0]);
+  });
+
+  it("strict fails without timetags", () => {
+    expect(() => toOscBundle({ elements: [] }, true)).toThrowError();
+  });
 });
