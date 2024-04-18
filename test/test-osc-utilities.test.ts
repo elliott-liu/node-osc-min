@@ -1156,3 +1156,12 @@ describe("toOscPacket", () => {
   });
 });
 
+describe("applyMessageTransformerToBundle", () => {
+  it("fails on bundle without tag", () => {
+    const func = applyMessageTransformerToBundle((a) => a);
+    expect(() =>
+      func(concat([toOscString("#grundle"), toIntegerBuffer(0, "Int64")])),
+    ).toThrowError();
+  });
+});
+
