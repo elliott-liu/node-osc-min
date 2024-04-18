@@ -1165,3 +1165,40 @@ describe("applyMessageTransformerToBundle", () => {
   });
 });
 
+describe("addressTransform", () => {
+  it("works with identity", () => {
+    const testBuffer = concat([
+      toOscString("/message"),
+      Buffer.from("gobblegobblewillsnever\u0000parse blah lbha"),
+    ]);
+    const transformed = applyTransform(
+      testBuffer,
+      addressTransform((a) => a),
+    );
+    testBuffer.forEach((byte, index) => {
+      expect(transformed[index]).toBe(byte);
+    });
+  });
+
+  it("works with bundles", { todo: true }, () => {
+    const base: OscBundle = {
+      timetag: [0, 0],
+      elements: [{ address: "test1" }, { address: "test2" }],
+    };
+    const transformed = fromOscPacket(
+      applyTransform(
+        toOscPacket(base),
+        addressTransform((a) => `/prelude/${a}`),
+      ),
+    ) as OscBundle; // Type assertion
+    expect(transformed?.timetag).toEqual([0, 0]);
+    expect(transformed?.elements.length).toBe(base.elements.length);
+    base.elements.forEach((element, index) => {
+      expect(transformed.elements[index].timetag).toEqual(element.timetag);
+      expect(transformed.elements[index].address).toEqual(
+        `/prelude/${element.address}`,
+      );
+    });
+  });
+});
+
