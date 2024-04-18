@@ -15,7 +15,10 @@ import {
  * @returns The OSC bundle buffer.
  * @throws If the bundle is missing a timetag and strict mode is enabled.
  */
-export function toOscBundle(bundle: OscBundle, strict: boolean): Buffer {
+export function toOscBundle(
+  bundle: OscBundle,
+  strict: boolean = false,
+): Buffer {
   // The bundle must have a timetag and elements
   if (strict && !bundle.timetag) {
     throw new Error("Bundles must have timetags.");

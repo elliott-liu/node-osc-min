@@ -12,6 +12,8 @@ import {
   type OscMessage,
   toOscMessage,
   toOscArgument,
+  toOscBundle,
+  type OscBundle,
 } from "src";
 import type { Arg, ArgType, Timetag } from "src/types";
 import { isArgType, isArgTypeArray } from "src/helpers";
@@ -1013,5 +1015,42 @@ describe("toOscMessage", () => {
       random_field: 42,
       "is pretty random": 888,
     } as any);
+  });
+});
+
+function roundTripBundle(bundleElements: (OscMessage | OscBundle)[]) {
+  const oscMessage: OscBundle = {
+    timetag: [0, 0],
+    elements: bundleElements,
+    oscType: "bundle",
+  };
+
+  const { elements, oscType, timetag } = fromOscBundle(
+    toOscBundle(oscMessage),
+    true,
+  );
+
+  expect(timetag).toEqual([0, 0]);
+
+  const length = typeof bundleElements === "object" ? elements.length : 1;
+  expect(elements.length).toBe(length);
+
+  for (let i = 0; i < length; i++) {
+    if (typeof bundleElements === "object") {
+      expect((elements[i] as OscBundle).timetag).toEqual(
+        (bundleElements[i] as OscBundle).timetag,
+      );
+      expect((elements[i] as OscMessage).address).toBe(
+        (bundleElements[i] as OscMessage).address,
+      );
+    } else {
+      expect((elements[i] as OscMessage).address).toBe(bundleElements);
+    }
+  }
+}
+
+describe("toOscBundle", () => {
+  it("no elements works", () => {
+    roundTripBundle([]);
   });
 });
