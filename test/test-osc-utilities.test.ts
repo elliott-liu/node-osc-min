@@ -1289,3 +1289,12 @@ describe("timestampToTimetag", () => {
   });
 });
 
+describe("dateToTimetag", () => {
+  it("converts date to ntp array", () => {
+    const date = new Date();
+    const timetag = dateToTimetag(date);
+    const roundTripDate = timetagToDate(timetag);
+    assertDatesEqual(date, roundTripDate);
+  });
+});
+
