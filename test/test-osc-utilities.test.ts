@@ -1234,3 +1234,32 @@ describe("messageTransform", () => {
   });
 });
 
+// assert dates are equal to within floating point conversion error
+function assertDatesEqual(date1: Date, date2: Date) {
+  expect(
+    Math.abs(date1.getTime() - date2.getTime()),
+    `${date1} != ${date2}`,
+  ).toBeLessThanOrEqual(1);
+}
+
+describe("toTimetagBuffer", () => {
+  it("works with a delta number", () => {
+    const delta = 1.2345;
+    const buffer = toTimetagBuffer(delta);
+  });
+
+  it("works with a date", () => {
+    const date = new Date();
+    const buffer = toTimetagBuffer(date);
+  });
+
+  it("works with a timetag array", () => {
+    const timetag: Timetag = [1000, 10001];
+    const buffer = toTimetagBuffer(timetag);
+  });
+
+  it("throws with invalid", () => {
+    expect(() => toTimetagBuffer("some bullshit" as any)).toThrowError();
+  });
+});
+
